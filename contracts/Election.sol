@@ -14,11 +14,11 @@ contract Election {
     mapping(uint => Candidate) public candidates;
     // Constructor. Declare public since its gonna be run on deployment
     constructor () public {
-            addCandidate("Raila","One last chance")
-            addCandidate("Ruto","Im not like other guys")
-            addCandidate("Jayden","Suffering")
+            addCandidate("Raila","One last chance");
+            addCandidate("Ruto","Im not like other guys");
+            addCandidate("Jayden","Suffering");
     }
-    function addCandidate(string _name,string _party) private {
+    function addCandidate(string memory _name,string memory _party) private {
         candidatesCount++;
         candidates[candidatesCount] = Candidate(candidatesCount,_party,_name,0);
     }
