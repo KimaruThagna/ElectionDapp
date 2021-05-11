@@ -17,12 +17,13 @@ contract("Election", function(accounts) {
       return electionInstance.candidates(1);
     }).then(function(candidate) {
       assert.equal(candidate[0], 1, "contains the correct id");
-      assert.equal(candidate[1], "Raila", "contains the correct name");
-      assert.equal(candidate[2], 0, "contains the correct votes count");
+      assert.equal(candidate[2], "Raila", "contains the correct name for 1");
+      assert.equal(candidate[3], 0, "contains the correct votes count");
       return electionInstance.candidates(2);
     }).then(function(candidate) {
       assert.equal(candidate[0], 2, "contains the correct id");
-      assert.equal(candidate[1], "Ruto", "contains the correct name");
-      assert.equal(candidate[2], 0, "contains the correct votes count");
+      assert.equal(candidate[2], "Ruto", "contains the correct name for 2");
+      assert.equal(candidate[3], 0, "contains the correct votes count");
     });
+  });
   });
