@@ -12,6 +12,8 @@ contract Election {
     uint public candidatesCount;
     //fetch candidate by id. Consider it a dictionary of candidate objects in Python
     mapping(uint => Candidate) public candidates;
+    // keep track of voters
+    mapping(address => bool) public voters;
     // Constructor. Declare public since its gonna be run on deployment
     constructor () public {
             addCandidate("Raila","One last chance");
@@ -21,5 +23,11 @@ contract Election {
     function addCandidate(string memory _name,string memory _party) private {
         candidatesCount++;
         candidates[candidatesCount] = Candidate(candidatesCount,_party,_name,0);
+    }
+    function vote(uint _candidateId) public {
+        // record voter
+        voters[msg.sender] = true;
+        //cast a vote
+        candidates[_candidateId].voteCount ++;
     }
 }
