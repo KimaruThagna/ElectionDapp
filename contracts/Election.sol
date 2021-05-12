@@ -14,6 +14,8 @@ contract Election {
     mapping(uint => Candidate) public candidates;
     // keep track of voters
     mapping(address => bool) public voters;
+    //trigger event on vote cast
+    event votedEvent(uint indexed _candidateId);
     // Constructor. Declare public since its gonna be run on deployment
     constructor () public {
             addCandidate("Raila","One last chance");
@@ -25,9 +27,15 @@ contract Election {
         candidates[candidatesCount] = Candidate(candidatesCount,_party,_name,0);
     }
     function vote(uint _candidateId) public {
+        // ensure voter has not voted before
+        require(!voters[msg.sender]);
+        // ensure that you vote for a valid and existing candidate
+        require(_candidateId > 0 && _candidateId <= candidatesCount);
         // record voter
         voters[msg.sender] = true;
         //cast a vote
         candidates[_candidateId].voteCount ++;
+        // trigger vote event
+        votedEvent(_candidateId);
     }
 }
